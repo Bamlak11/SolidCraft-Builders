@@ -3,9 +3,12 @@ import Link from 'next/link';
 import { FC, useState } from 'react';
 import Image from 'next/image'
 import logo from '../../../public/Logo.png'
+import Modal from './Modal';
+import ProjectForm from './ProjectForm';
 
 const Navbar: FC = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -67,15 +70,19 @@ const Navbar: FC = () => {
         </div>
 
         {/* Button */}
-        <Link href="/projects" className='pr-4'>
-          <button className="flex bg-[#C1934F] px-2 border border-black py-2 rounded-md text-sm font-medium">
+        <div className='pr-4'>
+          <button  onClick={() => setIsModalOpen(true)} className="flex bg-[#C1934F] px-2 border border-black py-2 rounded-md text-sm font-medium">
           <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none">
             <path d="M3.49121 18.4H5.99121C7.29121 18.4 8.49121 17.9 9.39121 17L19.6912 6.7C21.1912 5.2 21.1912 2.7 19.6912 1.2C18.9912 0.4 17.9912 0 16.9912 0C15.9912 0 14.9912 0.4 14.1912 1.1L3.89121 11.5C2.99121 12.4 2.49121 13.7 2.49121 15V17.5C2.49121 18 2.99121 18.4 3.49121 18.4ZM4.49121 14.9C4.49121 14.1 4.79121 13.4 5.29121 12.9L13.4912 4.7L14.8912 6C15.0912 6.2 15.3912 6.3 15.5912 6.3C15.8912 6.3 16.0912 6.2 16.2912 6C16.6912 5.6 16.6912 5 16.2912 4.6L14.8912 3.2L15.5912 2.5C15.9912 2.2 16.4912 2 16.9912 2C17.4912 2 17.9912 2.2 18.2912 2.6C18.9912 3.3 18.9912 4.6 18.2912 5.3L7.99121 15.6C7.49121 16.1 6.69121 16.4 5.99121 16.4H4.49121V14.9Z" fill="black"/>
             <path d="M21.6912 20H1.69116C1.09116 20 0.691162 20.4 0.691162 21C0.691162 21.6 1.09116 22 1.69116 22H21.6912C22.2912 22 22.6912 21.6 22.6912 21C22.6912 20.4 22.2912 20 21.6912 20Z" fill="black"/>
           </svg>
             <p className='px-4 font-semibold'>New Project</p>
           </button>
-        </Link>
+        </div>
+
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+                <ProjectForm />
+            </Modal>
 
       </div>
     </nav>
